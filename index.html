@@ -325,17 +325,18 @@ function toggleMusic() {
 }
 </script>
 <body>
-<!-- MUSIC - SoundCloud Embed (hidden) -->
-<iframe id="sc-player"
-  src="https://youtu.be/595TfZrE8Oc"
-  width="1" height="1" frameborder="0" scrolling="no"
-  allow="autoplay"
-  style="position:fixed;opacity:0;pointer-events:none;"></iframe>
+<!-- AUDIO PLAYER (Luan këngën nga PC) -->
+<audio id="my-audio" autoplay loop>
+  <source src="yll-limani-ma-shume-se-une-official-visualizer_wPyLJFft.mp3" type="audio/mpeg">
+ 
+</audio>
 
+<!-- Shiriti i muzikës -->
 <div class="music-bar">
-<span>🎵 ca kisha bo nese s kishe ardh ne jeten tem</span>
-<button id="playBtn" onclick="toggleMusic()">⏸</button>
+  <span>🎵  Ma shumë se unë s ka </span>
+  <button id="playBtn" onclick="toggleMusic()">⏸</button>
 </div>
+
 
 <div class="grain"></div>
 <div class="particles" id="particles"></div>
@@ -400,7 +401,7 @@ gjithmon prekem dhe s arrij dot ta shkruaj aq bukur sa ti e di se mund te hasim 
       <div class="tl-dot">♾️</div>
       <div class="tl-text">
         <h3>E ardhmja</h3>
-        <p>Shumë vite të tjera bashkë, dorë për dore</p>
+        <p>Shumë vite të tjera bashkë, dorë për dore s shoh dot t ardhme pa ty</p>
       </div>
     </div>
   </div>
@@ -413,6 +414,28 @@ gjithmon prekem dhe s arrij dot ta shkruaj aq bukur sa ti e di se mund te hasim 
 </div>
 
 <script>
+
+// Kontrolli i audios lokale
+function toggleMusic() {
+  const audio = document.getElementById('my-audio');
+  const btn = document.getElementById('playBtn');
+
+  if (audio.paused) {
+    audio.play();
+    btn.textContent = "⏸";
+  } else {
+    audio.pause();
+    btn.textContent = "▶";
+  }
+}
+
+// Rregullimi për autoplay (shfletuesit e bllokojnë autoplay nëse përdoruesi nuk ka klikuar diku)
+window.addEventListener('click', () => {
+  const audio = document.getElementById('my-audio');
+  if (audio.paused && document.getElementById('playBtn').textContent === "⏸") {
+    audio.play().catch(e => console.log("Autoplay u bllokua nga shfletuesi, pret klikimin."));
+  }
+}, { once: true });
 const pWrap=document.getElementById('particles');
 for(let i=0;i<35;i++){
  const p=document.createElement('div');
