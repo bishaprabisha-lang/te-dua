@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2 Vjet Bashkë ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --wine: #4a1428;
+    --burgundy: #7a1f3d;
+    --rose-gold: #d4a373;
+    --blush: #f2c4ce;
+    --cream: #faf1e6;
+    --gold: #c9a35f;
+    --deep: #1a0a10;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: linear-gradient(180deg, var(--deep) 0%, var(--wine) 50%, var(--burgundy) 100%);
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--cream);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* ── Ambient texture ── */
+  .grain {
+    position: fixed; inset: 0; z-index: 1; pointer-events: none;
+    background-image: radial-gradient(circle at 20% 30%, rgba(212,163,115,.08), transparent 40%),
+                       radial-gradient(circle at 80% 70%, rgba(122,31,61,.25), transparent 45%),
+                       radial-gradient(circle at 50% 100%, rgba(201,163,95,.1), transparent 50%);
+  }
+
+  /* ── Floating particles (soft light / petals) ── */
+  .particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .particle {
+    position: absolute;
+    bottom: -40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,163,115,.9), rgba(212,163,115,0) 70%);
+    animation: rise var(--dur, 14s) ease-in infinite var(--delay, 0s);
+    opacity: 0;
+  }
+  @keyframes rise {
+    0%{transform:translateY(0) translateX(0);opacity:0;}
+    10%{opacity:.7;}
+    90%{opacity:.4;}
+    100%{transform:translateY(-115vh) translateX(var(--drift, 30px));opacity:0;}
+  }
+
+  /* ── Petals falling ── */
+  .petals { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+  .petal {
+    position: absolute;
+    top: -30px;
+    width: 14px; height: 10px;
+    background: linear-gradient(135deg, var(--blush), var(--rose-gold));
+    border-radius: 60% 0 60% 0;
+    animation: petal-fall var(--pdur, 11s) linear infinite var(--pdelay, 0s);
+    opacity: .75;
+  }
+  @keyframes petal-fall {
+    0%{transform:translateY(-30px) translateX(0) rotate(0deg);}
+    50%{transform:translateY(50vh) translateX(40px) rotate(180deg);}
+    100%{transform:translateY(110vh) translateX(-20px) rotate(360deg);opacity:0;}
+  }
+
+  /* ── Content ── */
+  .content {
+    position: relative; z-index: 10;
+    display: flex; flex-direction: column;
+    align-items: center;
+    padding: 90px 20px 110px;
+  }
+
+  /* ── Ornament divider ── */
+  .ornament {
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: .5em;
+    margin: 0 auto 28px;
+    opacity: .85;
+    animation: fadeIn 1.2s ease both;
+  }
+
+  @keyframes fadeIn {
+    from{opacity:0;transform:translateY(-10px);}
+    to{opacity:.85;transform:translateY(0);}
+  }
+
+  .years-badge {
+    font-family: 'Tangerine', cursive;
+    font-size: 8rem;
+    line-height: .8;
+    color: var(--rose-gold);
+    text-shadow: 0 0 40px rgba(212,163,115,.5), 0 4px 20px rgba(0,0,0,.4);
+    animation: appear 1.1s cubic-bezier(.22,1,.36,1) .2s both;
+  }
+
+  @keyframes appear {
+    from{opacity:0;transform:translateY(30px) scale(.94);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+
+  .years-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.15rem;
+    letter-spacing: .35em;
+    text-transform: uppercase;
+    color: var(--blush);
+    margin-top: 6px;
+    margin-bottom: 44px;
+    animation: appear 1s ease .4s both;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 7vw, 3.8rem);
+    text-align: center;
+    line-height: 1.15;
+    max-width: 760px;
+    background: linear-gradient(135deg, var(--cream) 20%, var(--rose-gold) 55%, var(--gold) 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    animation: appear 1s ease .5s both;
+  }
+
+  .subtitle {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--blush);
+    opacity: .9;
+    margin-bottom: 60px;
+    animation: appear 1s ease .65s both;
+  }
+
+  /* ── Letter card ── */
+  .letter {
+    background: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(212,163,115,.35);
+    border-radius: 4px;
+    padding: 56px 48px;
+    max-width: 640px; width: 100%;
+    position: relative;
+    box-shadow: 0 30px 90px rgba(0,0,0,.5), inset 0 0 60px rgba(212,163,115,.04);
+    animation: appear 1s ease .8s both;
+  }
+  .letter::before, .letter::after {
+    content: '';
+    position: absolute;
+    width: 30px; height: 30px;
+    border: 1.5px solid var(--gold);
+    opacity: .6;
+  }
+  .letter::before { top: 14px; left: 14px; border-right: none; border-bottom: none; }
+  .letter::after { bottom: 14px; right: 14px; border-left: none; border-top: none; }
+
+  .letter p {
+    font-size: 1.28rem;
+    line-height: 2;
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .letter p:last-child { margin-bottom: 0; }
+  .letter em {
+    font-style: italic;
+    color: var(--rose-gold);
+  }
+
+  .signature-line {
+    text-align: center;
+    margin-top: 34px;
+    font-family: 'Tangerine', cursive;
+    font-size: 2.6rem;
+    color: var(--rose-gold);
+  }
+
+  /* ── Timeline / Milestones ── */
+  .timeline {
+    max-width: 680px; width: 100%;
+    margin-top: 80px;
+    animation: appear 1s ease 1s both;
+  }
+
+  .timeline-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 46px;
+    letter-spacing: .05em;
+  }
+
+  .tl-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 34px;
+    position: relative;
+    padding-left: 4px;
+  }
+  .tl-item:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 21px; top: 46px;
+    width: 1px; height: calc(100% + 10px);
+    background: linear-gradient(180deg, var(--gold), transparent);
+    opacity: .4;
+  }
+  .tl-dot {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--rose-gold), var(--burgundy));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 0 20px rgba(212,163,115,.4);
+  }
+  .tl-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--blush);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .tl-text p {
+    font-size: 1.05rem;
+    color: rgba(250,241,230,.75);
+    line-height: 1.6;
+  }
+
+  /* ── Heart counter ── */
+  .counter-wrap {
+    margin-top: 80px;
+    text-align: center;
+    animation: appear 1s ease 1.2s both;
+  }
+  .counter-label {
+    font-style: italic;
+    color: var(--blush);
+    font-size: 1.1rem;
+    letter-spacing: .1em;
+    margin-bottom: 18px;
+    opacity: .85;
+  }
+  .heart-final {
+    font-size: 4.5rem;
+    display: inline-block;
+    animation: heartbeat 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(212,163,115,.6));
+  }
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.18);}
+    30%{transform:scale(1);}
+    45%{transform:scale(1.12);}
+    100%{transform:scale(1);}
+  }
+
+  .final-words {
+    margin-top: 26px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--rose-gold);
+    max-width: 500px;
+  }
+
+  @media (max-width: 600px) {
+    .letter { padding: 40px 26px; }
+    .years-badge { font-size: 6rem; }
+  }
+
+.music-bar{position:fixed;bottom:20px;right:20px;background:rgba(0,0,0,.6);padding:10px 15px;border-radius:30px;display:flex;gap:10px;align-items:center;z-index:9999;color:#fff}
+.music-bar button{border:none;background:#c9456a;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer}
+
+</style>
+</head>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+
+<script>
+let scWidget = null;
+let scPlaying = true;
+
+window.addEventListener('load', () => {
+  const iframe = document.getElementById('sc-player');
+
+  if (window.SC && window.SC.Widget) {
+    scWidget = window.SC.Widget(iframe);
+
+    scWidget.bind(window.SC.Widget.Events.READY, () => {
+      scWidget.setVolume(30);
+      scWidget.play();
+    });
+  }
+});
+
+function toggleMusic() {
+  const btn = document.getElementById('playBtn');
+  if (!scWidget) return;
+
+  if (scPlaying) {
+    scWidget.pause();
+    scPlaying = false;
+    btn.textContent = "▶";
+  } else {
+    scWidget.play();
+    scPlaying = true;
+    btn.textContent = "⏸";
+  }
+}
+</script>
+<body>
+<!-- MUSIC - SoundCloud Embed (hidden) -->
+<iframe id="sc-player"
+  src="https://youtu.be/595TfZrE8Oc"
+  width="1" height="1" frameborder="0" scrolling="no"
+  allow="autoplay"
+  style="position:fixed;opacity:0;pointer-events:none;"></iframe>
+
+<div class="music-bar">
+<span>🎵 ca kisha bo nese s kishe ardh ne jeten tem</span>
+<button id="playBtn" onclick="toggleMusic()">⏸</button>
+</div>
+
+<div class="grain"></div>
+<div class="particles" id="particles"></div>
+<div class="petals" id="petals"></div>
+
+<div class="content">
+  <div class="ornament">✦ ✦ ✦</div>
+  <div class="years-badge">2</div>
+  <div class="years-label">Vite Bashkë</div>
+
+  <h1>Dy vite më i dashuruar<br>se dita e parë</h1>
+  <p class="subtitle">Për ty, e dashura ime kisushja jeme jeta jeme 
+  SOME KISSES ARE WORTH WAITING FOR AND I WAITED ALL MY LIFE ❤️</p>
+
+  <div class="letter">
+    <p>Dy vite më parë fillova rrugëtimin më të bukur të jetës sime ku dora ime zgjodhi emrin tend nuk ishte rastesi ishte e shkruar te ndodhte ashtu 
+	erdhe si nje lil kisi u bere jeta ime dita dites m pelqeje dhe cdo dite  me shme doja te degjoja ty dhe gjitcka rreth teje jemi shume t njejt me njeri tjetrin kemi shume pelqime te perbashketa  dashuria jote me ben te jap versionin tim me te mir
+versionin tim ku kurr s mendoja qe do e jepja per dike panvarsish cdo gjeje qe ke kaluar perseri me jep ate buzqeshjen e embel me ata sy qe shkelqejn dhe kjo esht e vetmja gje qe dua e vetmja gje qe dua esht ti t jesh e lumtur dhe kjo lumturia jote 
+me  ndez cdo emocion te te bukur te mundshem  nuk do ta harroj kurr naten qe filluam te flisnim bashk ku mesayhet tona s kishi mbarim ku na zbardhte dita bashk ku harroja cdo pun dhe harroja uijn hapur dhe permbysja parkimin te puna e lshoja tubin n tok sikur 
+kishte ren jo se kisha ren un ne dashuri duke fol me ty je i vetmi person qe t jam perkushtuar vetem ty, si kam tregu kurr  dikujt se si ndihem po ti me ke ber ta provoj nuk do harroj kurr netet qe ke qendruar me mua zgjuar 
+i will always be there for you asgje s eshte me bukur se koha qe shpenyoj me ty po cuditerisht oret me ty duken si sekonda kur flas me ty dita ime behet me e bukur you have the sweetest soul cdo moment qe e kaloj me ty me duket pak
+dua me shume dhe prap nuk me mjafton cdo gje ka qen e bukur qe kur kam pas ty je i vetmi person qe me ben te ndjeshem edhe kur nuk ma thua e ndej nga larg se dicka nuk shkon kurr mos ki frik t me thuash problemet etua s do meryitem kurr do te t degjoj gjithmon  kam dite t mira dhe dite te keqia po tek te dyja jam duke mendu per ty
+sokur keemi takim emocionohem cdo here si t jete takimi yne ty nuk te dua vetem per sot dhe neser ty te dua deri ne momentin kur te mos jemi me ne kte tok dhe te tregojm kto femijve tone pamvarsisht sa i merzitur kam qen kto koh ti ke qen gjitmon nje forc per mua 
+nje drite lumutrie per mua ti me ke dhen nje shkendi dashuri qe zemra ime vetem digjet vetm per ty percafimet me ty jan qetsi per shpirtin tim  nuk me mjaafojn kurr dua te t kem ngjitur gjith jeten te shija ne enderra po 
+takimet tona kan qen me t bukura se enderrat dhe kur u ktheja ne shtepi nuk e diaj a jam ne realitet a jo dashurin time per ty as disney se ben dot film tani qe po shkruaj kte leter nuk kam fjetur fare po zbardh dita po per mua zbardh kur zgjohesh ti nuk do ta harroj kurr se si ma bere ditelindjen me te bukur te jetes time akoma e lexoj letren tende
+gjithmon prekem dhe s arrij dot ta shkruaj aq bukur sa ti e di se mund te hasim ne veshtirsi ndonjehere po un do jem gjithmon aty per ty edhe kur jam shume i mbingarkuar mendoj per ty edhh kur s me ze gjumi me duhet te mendoj gjera pozitive mendoj per percafimin tend
+	— <em>me ty</em>.</p>
+    <p>Çdo ditë që kalon, të dua edhe më shumë se dje. Ti je qetësia jeme, buzëqeshja ime, my home vendi ku qendron mendja dhe zemra.</p>
+    <p>Faleminderit që më zgjodhe, që qëndrove, që më dashurove ashtu siç jam.</p>
+    <p>Sot ashtu si çdo natë, dua vetëm një gjë — <em>ty, përgjithmonë ne jeten teme .</em></p>
+    <div class="signature-line">Me gjithë zemrën time</div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-title">✦ Rrugëtimi Ynë ✦</div>
+
+    <div class="tl-item">
+      <div class="tl-dot">💫</div>
+      <div class="tl-text">
+        <h3>Fillimi</h3>
+        <p>Dita kur takimi ynë ndryshoi gjithçka </p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">🌹</div>
+      <div class="tl-text">
+        <h3>Dashuria u rrit</h3>
+        <p>Çdo moment bashkë u bë kujtim i çmuar qe s me iken nga mendja</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">✨</div>
+      <div class="tl-text">
+        <h3>Sot</h3>
+        <p>Dy vite më vonë, dashuria jonë është më e fortë se kurrë</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot">♾️</div>
+      <div class="tl-text">
+        <h3>E ardhmja</h3>
+        <p>Shumë vite të tjera bashkë, dorë për dore</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="counter-wrap">
+    <div class="counter-label">✦ Gëzuar 2-Vjetorin, dashuria ime ✦</div>
+    <div class="heart-final">❤️</div>
+    <p class="final-words">Ti je zgjedhja ime, sot dhe përherë</p>
+  </div>
+</div>
+
+<script>
+const pWrap=document.getElementById('particles');
+for(let i=0;i<35;i++){
+ const p=document.createElement('div');
+ p.className='particle';
+ const size=4+Math.random()*10;
+ p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;--dur:${10+Math.random()*10}s;--delay:${Math.random()*12}s;--drift:${(Math.random()*80-40)}px;`;
+ pWrap.appendChild(p);
+}
+const petalWrap=document.getElementById('petals');
+for(let i=0;i<22;i++){
+ const pt=document.createElement('div');
+ pt.className='petal';
+ pt.style.cssText=`left:${Math.random()*100}%;--pdur:${8+Math.random()*9}s;--pdelay:${Math.random()*10}s;transform:scale(${.7+Math.random()*.8});`;
+ petalWrap.appendChild(pt);
+}
+</script>
+</body>
+</html>
